@@ -334,7 +334,8 @@ class _BinaryGaussianProcessClassifierLaplace(BaseEstimator):
                     "Gradient can only be evaluated for theta!=None")
             return self.log_marginal_likelihood_value_
 
-        kernel = self.kernel_.clone_with_theta(theta)
+        kernel = self.kernel_
+        kernel.theta = theta
 
         if eval_gradient:
             K, K_gradient = kernel(self.X_train_, eval_gradient=True)
